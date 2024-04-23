@@ -3,7 +3,7 @@ name: Deploy Docker Container
 on:
   push:
     branches:
-      - prod # Set this to the branch you want to deploy from
+      - prod
 
 jobs:
   build_and_deploy:
@@ -22,7 +22,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./webapp
+          file: ./webapp/Dockerfile
           push: true
           tags: simonsejse/dis-webapp:latest
 
