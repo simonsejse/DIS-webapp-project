@@ -9,16 +9,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Copy files to the server
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "."
-          target: "/remote/path/"
+          target: "/disproject/"
+
       - name: Deploy via Docker Compose
         uses: appleboy/ssh-action@master
         with:
@@ -26,6 +27,6 @@ jobs:
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /remote/path/
+            cd /disproject/
             docker-compose down
             docker-compose up --build -d
