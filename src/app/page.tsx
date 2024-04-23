@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import CalendarForm from "@/components/ui/CalendarForm"
-import Test from "@/components/Test"
+import Test from "@/components/client/Test"
 
 export default function Home() {
   return (

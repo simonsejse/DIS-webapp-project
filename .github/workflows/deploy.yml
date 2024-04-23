@@ -2,8 +2,6 @@ name: Deploy Docker Container
 
 on:
   push:
-    branches:
-      - prod
 
 jobs:
   build_and_deploy:
