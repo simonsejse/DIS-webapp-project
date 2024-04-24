@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FinansFokus
+
+..... 
+
+## Prerequisites
+
+- Node.js
+- Docker
+- Docker-Compose
+
+## Tech Stack for "dis-webapp-project"
+
+### Core Technologies
+- Next.js
+- React
+- Node
+- Tailwind CSS
+
+### Development Tools
+- TypeScript
+- ESLint
+- Prisma
+
+### Dependencies
+- react-hook-form
+- @hookform/resolvers
+- date-fns
+- @radix-ui/react-accordion
+- @radix-ui/react-popover
+- @radix-ui/react-toast
+- @radix-ui/react-label
+- @radix-ui/react-slot
+- lucide-react
+- clsx
+- tailwind-merge
+- tailwindcss-animate
+- zod
 
 ## Getting Started
 
-First, run the development server:
+...
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Deploy: Push to Production
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Description:**
+Ready to merge into `prod`. This will kick off the CI/CD for automatic deployment. Key updates include:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **New Features:** [Describe briefly]
+- **Bug Fixes:** [List fixes]
+- **Improvements:** [Mention improvements]
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Please review and merge to deploy.
