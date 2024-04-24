@@ -36,10 +36,6 @@
 - tailwindcss-animate
 - zod
 
-## Getting Started
-
-...
-
 ## Deploy: Push to Production
 
 **Description:**
