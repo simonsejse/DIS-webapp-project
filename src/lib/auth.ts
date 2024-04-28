@@ -42,12 +42,11 @@ export const authOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin", // Custom sign-in page
-    error: "/auth/error", // Error handling page
+    signIn: "/auth/signin",
+    error: "/auth/error",
   },
 } satisfies NextAuthOptions;
 
-// Use it in server contexts
 export function auth(
   ...args:
     | [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]

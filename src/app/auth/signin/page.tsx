@@ -1,7 +1,9 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
-
+import { redirect } from "next/navigation";
+import Link from "next/link";
+g
 type LoginInput = {
   email: string;
   password: string;
@@ -94,6 +96,9 @@ export default function LoginPage({ searchParams }: PageProps) {
               </p>
             )}
           </form>
+          <Link href="/auth/register">
+            Don't have an account? Register here
+          </Link>
         </div>
       </div>
     </>

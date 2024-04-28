@@ -2,17 +2,23 @@
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 type Props = {};
 type LoginInput = {
   email: string;
   password: string;
+  first_name: string;
+  last_name: string;
 };
 
 export default function Register(props: Props) {
   const [inputs, setInputs] = useState<LoginInput>({
     email: "",
     password: "",
+    first_name: "",
+    last_name: "",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,10 +60,50 @@ export default function Register(props: Props) {
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
+              htmlFor="first_name"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              First Name
+            </label>
+            <div className="mt-2">
+              <input
+                id="first_name"
+                name="first_name"
+                type="text"
+                autoComplete="off"
+                required
+                value={inputs.first_name || ""}
+                onChange={handleChange}
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="last_name"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Last Name
+            </label>
+            <div className="mt-2">
+              <input
+                id="last_name"
+                name="last_name"
+                type="text"
+                autoComplete="off"
+                required
+                value={inputs.last_name || ""}
+                onChange={handleChange}
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+          <div>
+            <label
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              email
+              Email
             </label>
             <div className="mt-2">
               <input
@@ -103,6 +149,7 @@ export default function Register(props: Props) {
             </button>
           </div>
         </form>
+        <Link href="/auth/signin">Already have an account? Sign in</Link>
       </div>
     </div>
   );

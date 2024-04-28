@@ -3,11 +3,13 @@ import type { NextRequest } from "next/server";
 import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
-  const { email, password } = await req.json();
+  const { email, password, first_name, last_name } = await req.json();
 
-  if (!email || !password) {
+  if (!email || !password || !first_name || !last_name) {
     return new Response(
-      JSON.stringify({ error: "Email and password are required" }),
+      JSON.stringify({
+        error: "Email, password, first name and last name are required",
+      }),
       {
         status: 400,
         headers: {
@@ -17,7 +19,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const userId = await registerUser(email, password);
+  const userId = await registerUser(email, password, first_name, last_name);
 
   if (!userId) {
     return new Response(JSON.stringify({ error: "Failed to create user" }), {
@@ -41,7 +43,9 @@ export async function POST(req: NextRequest) {
 
 async function registerUser(
   email: string,
-  password: string
+  password: string,
+  first_name: string,
+  last_name: string
 ): Promise<number | null> {
   try {
     const saltRounds = 10;
@@ -50,8 +54,8 @@ async function registerUser(
     const user = await prisma.user.create({
       data: {
         email,
-        first_name: "",
-        last_name: "",
+        first_name: first_name,
+        last_name: last_name,
         password: hashedPassword,
       },
     });
