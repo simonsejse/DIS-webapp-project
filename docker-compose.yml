@@ -3,8 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-      args:
-        - DATABASE_URL=${DATABASE_URL}
     volumes:
       - /app/node_modules
       - .:/app
