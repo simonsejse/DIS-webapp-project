@@ -21,27 +21,27 @@ const MenuItems = [
   },
   {
     name: "Transaktioner",
-    path: "/transaktioner",
+    path: "/dashboard/transaktioner",
     icon: BadgeDollarSign,
   },
   {
     name: "Budgetter",
-    path: "/budgetter",
+    path: "/dashboard/budgetter",
     icon: PieChart,
   },
   {
     name: "Mål",
-    path: "/mal",
+    path: "/dashboard/mal",
     icon: Target,
   },
   {
     name: "Rapporter",
-    path: "/rapporter",
+    path: "/dashboard/rapporter",
     icon: FileText,
   },
   {
     name: "Indstillinger",
-    path: "/indstillinger",
+    path: "/dashboard/indstillinger",
     icon: Settings,
   },
 ];
