@@ -2,7 +2,6 @@
 import { signIn } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
-
 type LoginInput = {
   email: string;
   password: string;
