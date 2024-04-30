@@ -6,10 +6,12 @@ COPY package*.json ./
 RUN npm install --production
 
 COPY prisma ./prisma/
-RUN npx prisma migrate deploy
-
 COPY . .
 
+# Set environment variables before running Prisma commands
+ENV DATABASE_URL="postgresql://user:password@localhost:5432/mydatabase?schema=public"
+
+RUN npx prisma migrate deploy
 RUN npx prisma generate
 
 RUN npm run build

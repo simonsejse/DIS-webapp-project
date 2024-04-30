@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+      args:
+        - DATABASE_URL=${DATABASE_URL}
     volumes:
       - /app/node_modules
       - .:/app
@@ -10,7 +12,6 @@ services:
       - "80:3000"
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://user:password@localhost:5432/mydatabase?schema=public
       
   db:
     image: postgres:latest
