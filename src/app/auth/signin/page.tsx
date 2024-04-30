@@ -1,9 +1,8 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-g
+g;
 type LoginInput = {
   email: string;
   password: string;
