@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
-export default function Page(props: Props){
+export default function Page(props: Props) {
   return (
-    <div className="text-2xl">Page</div>
-  )
+    <section className="h-full ">
+      <h1>indstillinger</h1>
+    </section>
+  );
 }

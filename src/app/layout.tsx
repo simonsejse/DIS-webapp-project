@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 import { Session } from "next-auth";
-import Navbar from "@/components/client/Navbar";
+import Navbar from "@/components/client/Sidebar";
 
 export const metadata: Metadata = {
   title: "FinansFokus",
