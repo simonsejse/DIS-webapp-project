@@ -9,6 +9,7 @@ import {
   FileText,
   Settings,
   Ellipsis,
+  Calculator,
 } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -19,6 +20,11 @@ const MenuItems = [
     name: "Dashboard",
     path: "/",
     icon: LayoutDashboard,
+  },
+  {
+    name: "Regnskab",
+    path: "/dashboard/regnskab",
+    icon: Calculator,
   },
   {
     name: "Transaktioner",
