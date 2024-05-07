@@ -9,6 +9,7 @@ import {
   FileText,
   Loader,
   MoreHorizontal,
+  Printer,
   Tag,
   Trash,
 } from "lucide-react";
@@ -123,8 +124,15 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Handlinger</DropdownMenuLabel>
-            <DropdownMenuItem>Åben Regnskab</DropdownMenuItem>
-
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <ChevronRight className="mr-2 h-4 w-4" />
+              <span>Se Regnskab</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Printer className="mr-2 h-4 w-4" />
+              <span>Udskriv Regnskab</span>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuSub>
@@ -137,21 +145,21 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuItem>
                       <StatusIcon
                         status="igangværende"
-                        className="mr-1.5 h-4 w-4 text-gray-600"
+                        className="mr-2 h-4 w-4 text-gray-600"
                       />
                       <span className="text-sm">Igangværende</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <StatusIcon
                         status="færdig"
-                        className="mr-1.5 h-4 w-4 text-gray-600"
+                        className="mr-2 h-4 w-4 text-gray-600"
                       />
                       <span className="text-sm">Færdig</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <StatusIcon
                         status="lukket"
-                        className="mr-1.5 h-4 w-4 text-gray-600"
+                        className="mr-2 h-4 w-4 text-gray-600"
                       />
                       <span className="text-sm ">Lukket</span>
                     </DropdownMenuItem>
@@ -159,7 +167,6 @@ export const columns: ColumnDef<Payment>[] = [
                 </DropdownMenuPortal>
               </DropdownMenuSub>
             </DropdownMenuGroup>
-
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Trash className="mr-2 h-4 w-4" />
