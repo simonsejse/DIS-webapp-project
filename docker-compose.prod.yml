@@ -18,6 +18,7 @@ services:
       - "80:3000"
     environment:
       - NODE_ENV=production
+      - NEXTAUTH_URL=http://159.223.237.95/
       - DATABASE_URL=postgresql://user:password@db:5432/mydatabase?schema=public
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
