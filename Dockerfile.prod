@@ -18,5 +18,3 @@ RUN chmod +x wait-for-it.sh
 CMD ["./wait-for-it.sh", "db:5432", "--", "npm", "run", "build"]
 
 EXPOSE 3000
-
-CMD ["npm", "start"]
