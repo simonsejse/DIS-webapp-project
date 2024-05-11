@@ -32,4 +32,3 @@ jobs:
             cd /disproject/
             docker-compose -f docker-compose.prod.yml down
             docker-compose -f docker-compose.prod.yml up --build -d
-            docker-compose -f docker-compose.prod.yml exec nextjs npx prisma migrate deploy
