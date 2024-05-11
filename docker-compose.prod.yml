@@ -1,6 +1,10 @@
 services:
   db:
     image: postgres:latest
+    networks:
+      default:
+        aliases:
+          - db
     restart: always
     environment:
       POSTGRES_DB: mydatabase
@@ -14,6 +18,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
+    networks:
+      - default
     ports:
       - "80:3000"
     environment:
