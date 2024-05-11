@@ -15,7 +15,7 @@ echo "Using username: $POSTGRES_USER"
 echo "Using password: $POSTGRES_PASSWORD"
 
 # Loop until we can successfully execute '\q' on PostgreSQL
-until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "$POSTGRES_USER" -c '\q'; do
+until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "$POSTGRES_USER" -d "mydatabase" -c '\q'; do
   >&2 echo "Postgres is unavailable - sleeping"
   sleep 1
 done
