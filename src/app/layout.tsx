@@ -12,12 +12,8 @@ export const metadata: Metadata = {
   description: "En app for at holde styr på dine finanser",
 };
 
-export default function RootLayout({
-  children,
-  session,
-}: Readonly<{
+export default function RootLayout({ children }: Readonly<{
   children: React.ReactNode;
-  session: Session;
 }>) {
   return (
     <html lang="en">
