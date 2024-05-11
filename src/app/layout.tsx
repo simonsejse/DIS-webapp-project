@@ -4,9 +4,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
-import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
-import Navbar from "@/components/client/Navbar";
+import Navbar from "@/components/client/Sidebar";
 
 export const metadata: Metadata = {
   title: "FinansFokus",
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
         {children}
         <Toaster />
       </body>
