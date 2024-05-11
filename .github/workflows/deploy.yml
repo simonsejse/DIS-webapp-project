@@ -30,7 +30,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /disproject/
-            docker-compose -f docker-compose.prod.yml exec nextjs npx prisma generate
-            docker-compose -f docker-compose.prod.yml exec nextjs npx prisma migrate deploy
             docker-compose -f docker-compose.prod.yml down
             docker-compose -f docker-compose.prod.yml up --build -d
+            docker-compose -f docker-compose.prod.yml exec nextjs npx prisma migrate deploy
