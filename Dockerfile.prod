@@ -10,8 +10,10 @@ COPY . .
 
 RUN npx prisma generate
 
-RUN npm run build
+# Ensure the wait-for script is executable
+COPY wait-for-it.sh ./wait-for-it.sh
+RUN chmod +x wait-for-it.sh
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+# Change to ENTRYPOINT to ensure it's always executed
+ENTRYPOINT ["./wait-for-it.sh", "db:5432", "--"]
+CMD ["npm", "run", "build"]
