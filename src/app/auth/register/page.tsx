@@ -5,6 +5,7 @@ import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
+import Image from "next/image";
 
 type Props = {};
 type LoginInput = {
@@ -56,26 +57,19 @@ export default function Register(props: Props) {
   };
 
   return (
-    <div>
-      <Alert>
-        <Info className="h-4 w-4" />
-        <AlertTitle>Heads up!</AlertTitle>
-        <AlertDescription>
-          Venligst undgå at bruge dit rigtige password, da dette er et
-          skoleprojekt, og sikkerheden ikke er fuldstændig på plads.
-        </AlertDescription>
-      </Alert>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="min-h-screen flex">
+      <div className="flex flex-col justify-center items-center w-full lg:w-1/2 bg-white p-8">
+        <div className="w-full max-w-sm">
+          <h1 className="text-2xl font-bold text-gray-900 mb-6">Sign Up</h1>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="first_name"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium text-gray-700"
               >
                 First Name
               </label>
-              <div className="mt-2">
+              <div className="mt-1">
                 <input
                   id="first_name"
                   name="first_name"
@@ -84,18 +78,18 @@ export default function Register(props: Props) {
                   required
                   value={inputs.first_name || ""}
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
             </div>
             <div>
               <label
                 htmlFor="last_name"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium text-gray-700"
               >
                 Last Name
               </label>
-              <div className="mt-2">
+              <div className="mt-1">
                 <input
                   id="last_name"
                   name="last_name"
@@ -104,18 +98,18 @@ export default function Register(props: Props) {
                   required
                   value={inputs.last_name || ""}
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium text-gray-700"
               >
                 Email
               </label>
-              <div className="mt-2">
+              <div className="mt-1">
                 <input
                   id="email"
                   name="email"
@@ -124,7 +118,7 @@ export default function Register(props: Props) {
                   required
                   value={inputs.email || ""}
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -132,11 +126,11 @@ export default function Register(props: Props) {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium text-gray-700"
               >
-                password
+                Password
               </label>
-              <div className="mt-2">
+              <div className="mt-1">
                 <input
                   id="password"
                   name="password"
@@ -145,7 +139,7 @@ export default function Register(props: Props) {
                   required
                   value={inputs.password || ""}
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -153,15 +147,27 @@ export default function Register(props: Props) {
             <div>
               <button
                 type="submit"
-                className="block w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white focus:ring-indigo-500 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-300 hover:to-blue-400"
               >
                 Register
               </button>
             </div>
           </form>
-          <Link href="/auth/signin">Already have an account? Sign in</Link>
+          <div className="mt-6 flex items-center justify-center">
+            <p className="text-gray-600 mr-2">Already have an account?</p>
+            <Link href="/auth/signin" className="font-medium text-indigo-600 hover:text-indigo-500 underline">
+              Sign In
+            </Link>
+          </div>
         </div>
       </div>
+      <div className="hidden lg:flex lg:w-1/2 bg-blue-500 text-white items-center justify-center">
+        <div className="text-center px-4">
+          <Image src="/images/GDP.jpg" alt="Finance Dashboard" className="mx-auto mb-4" width={300} height={200} />
+          <h2 className="text-2xl font-bold">Get All Your Finances At One Place.</h2>
+        </div>
+      </div>
+      <Image src="/wave.svg" alt="Wave SVG" className="mx-auto mt-8" width={300} height={100} />
     </div>
   );
 }
