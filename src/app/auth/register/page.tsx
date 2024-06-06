@@ -155,19 +155,36 @@ export default function Register(props: Props) {
           </form>
           <div className="mt-6 flex items-center justify-center">
             <p className="text-gray-600 mr-2">Already have an account?</p>
-            <Link href="/auth/signin" className="font-medium text-indigo-600 hover:text-indigo-500 underline">
-              Sign In
+            <Link
+              href="/auth/signin"
+              className="font-medium text-indigo-600 hover:text-indigo-500 underline"
+            >
+              Log In
             </Link>
           </div>
         </div>
       </div>
       <div className="hidden lg:flex lg:w-1/2 bg-blue-500 text-white items-center justify-center">
         <div className="text-center px-4">
-          <Image src="/images/GDP.jpg" alt="Finance Dashboard" className="mx-auto mb-4" width={300} height={200} />
-          <h2 className="text-2xl font-bold">Get All Your Finances At One Place.</h2>
+          <Image
+            src="/images/GDP.jpg"
+            alt="Finance Dashboard"
+            className="mx-auto mb-4"
+            width={300}
+            height={200}
+          />
+          <h2 className="text-2xl font-bold">
+            Get All Your Finances At One Place.
+          </h2>
         </div>
       </div>
-      <Image src="/wave.svg" alt="Wave SVG" className="mx-auto mt-8" width={300} height={100} />
+      <Image
+        src="/wave.svg"
+        alt="Wave SVG"
+        className="mx-auto mt-8"
+        width={300}
+        height={100}
+      />
     </div>
   );
 }

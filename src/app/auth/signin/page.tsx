@@ -2,7 +2,9 @@
 import { signIn } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
+import bankIcon from "@/../public/bank-icon.png";
+import wave from "@/../public/wave.svg";
 
 type LoginInput = {
   email: string;
@@ -64,7 +66,7 @@ export default function LoginPage({ searchParams }: PageProps) {
               <label
                 htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
-                >
+              >
                 Password
               </label>
               <div className="mt-2">
@@ -85,7 +87,7 @@ export default function LoginPage({ searchParams }: PageProps) {
               <button
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white focus:ring-indigo-500 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-300 hover:to-blue-400"
-                >
+              >
                 Log In
               </button>
             </div>
@@ -97,19 +99,32 @@ export default function LoginPage({ searchParams }: PageProps) {
           </form>
           <div className="mt-6 flex items-center justify-center">
             <p className="text-gray-600 mr-2">Don't have an account?</p>
-            <Link href="/auth/register" className="font-medium text-indigo-600 hover:text-indigo-500 underline">
+            <Link
+              href="/auth/register"
+              className="font-medium text-indigo-600 hover:text-indigo-500 underline"
+            >
               Sign Up
             </Link>
           </div>
         </div>
       </div>
-      <div className="hidden lg:flex lg:w-1/2 bg-blue-500 text-white items-center justify-center">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white items-center justify-center">
         <div className="text-center px-4">
-          <Image src="/images/GDP.jpg" alt="Finance" width={500} height={300} className="mx-auto mb-4"/>
-          <h2 className="text-2xl font-bold">Get All Your Finances At One Place.</h2>
+          <Image
+            src={bankIcon}
+            alt="Finance"
+            width={100}
+            height={60}
+            className="mx-auto mb-4"
+          />
+          <h2 className="text-2xl font-bold">
+            Get All Your Finances At One Place.
+          </h2>
         </div>
       </div>
-      <img src="/wave.svg" alt="Wave SVG" className="mx-auto mt-8" />
+      <div className="absolute -bottom-6 w-full">
+        <Image src={wave} alt="Wave SVG" layout="responsive" />
+      </div>
     </div>
   );
 }

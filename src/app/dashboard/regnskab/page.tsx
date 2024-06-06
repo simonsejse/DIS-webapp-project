@@ -12,6 +12,7 @@ import { DataTable } from "./data-table";
 import { Payment, columns } from "./columns";
 import { Button } from "@/components/ui/button";
 import AddAccountingModal from "./add-regnskab-modal";
+import { useQuery, useQueryClient } from "react-query";
 
 type Props = {};
 
@@ -129,6 +130,7 @@ async function getData(): Promise<Payment[]> {
 
 export default async function Regnskab({}: Props) {
   const data = await getData();
+
   return (
     <div className="max-w-6xl mx-auto p-5 pt-10">
       <div className="flex justify-between items-center mb-5">
