@@ -19,6 +19,7 @@ services:
     environment:
       - NODE_ENV=production
       - NEXTAUTH_URL=http://159.223.237.95/
+      - NEXTAUTH_SECRET=/MIM4PWS0XYBBFurQ80YnmT1VlnITQaV0Wkmbwp3uGQ=
       - DATABASE_URL=postgresql://user:password@db:5432/mydatabase?schema=public
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
