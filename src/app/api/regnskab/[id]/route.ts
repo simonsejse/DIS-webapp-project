@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
-import { ResponseBuilder } from "@/lib/responseBuilder";
+import {
+  ErrorResponseBuilder,
+  SuccessResponseBuilder,
+} from "@/lib/responseBuilder";
 import { parseNumber } from "@/lib/utils";
 
 type Props = {
@@ -11,15 +14,20 @@ type Props = {
 export async function GET(request: Request, { params }: Props) {
   const find_id = parseNumber(params.id);
   if (!find_id) {
-    return ResponseBuilder.create().status(400).message("Ugyldigt id").build();
+    return ErrorResponseBuilder.create()
+      .status(400)
+      .message("Ugyldigt id")
+      .ismajor(true)
+      .build();
   }
 
   const spread = await prisma.spreadsheet.findFirst({ where: { id: find_id } });
   if (!spread) {
-    return ResponseBuilder.create()
+    return ErrorResponseBuilder.create()
       .status(404)
       .message("Kunne ikke finde spreadsheet")
+      .ismajor(true)
       .build();
   }
-  return ResponseBuilder.create().body(spread).build();
+  return SuccessResponseBuilder.create().body(spread).build();
 }
