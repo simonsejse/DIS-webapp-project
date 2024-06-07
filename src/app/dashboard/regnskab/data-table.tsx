@@ -20,17 +20,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+type RowData = {
+  id: number;
+};
+
+export function DataTable<TData extends RowData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const router = useRouter();
 
   const table = useReactTable({
     data,
@@ -76,6 +82,11 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className="cursor-pointer hover:bg-gray-100 transition-colors duration-200 ease-in-out"
+                onClick={() => {
+                  const url = `/dashboard/regnskab/${row.original?.id}`;
+                  router.push(url);
+                }}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
