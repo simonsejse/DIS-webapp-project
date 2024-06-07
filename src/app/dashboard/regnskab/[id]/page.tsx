@@ -2,8 +2,8 @@
 
 import ErrorComponent from "@/components/client/ErrorComponent";
 import LoadingComponent from "@/components/client/LoadingComponent";
-import { ErrorResponse, SuccessResponse } from "@/lib/responseBuilder";
-import axios, { Axios, AxiosError, AxiosResponse } from "axios";
+import { ErrorResponse } from "@/lib/responseBuilder";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 
@@ -24,11 +24,11 @@ export default function Page({ params }: Props) {
   const fetchSpreadsheet = async (id: string) => {
     const response = await axios.get<Spreadsheet>(`/api/regnskab/${id}`);
     console.log(response.data);
-    return response.data;
+    return response;
   };
 
   const { isLoading, isError, data, error } = useQuery<
-    SuccessResponse,
+    AxiosResponse<Spreadsheet>,
     AxiosError<ErrorResponse>
   >({
     queryKey: ["spreadsheet", params.id],
@@ -47,7 +47,7 @@ export default function Page({ params }: Props) {
   return (
     <div>
       My Post: {params.id}
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <pre>{JSON.stringify(data?.data, null, 2)}</pre>
     </div>
   );
 }
