@@ -24,7 +24,7 @@ model Spreadsheet {
     description     String
     status          SpreadsheetStatus @default(OPEN)
     created_at      DateTime          @default(now())
-    last_updated_at DateTime          @default(now())
+    last_updated_at DateTime          @updatedAt
     categories      Category[]
     spreadsheets    UserSpreadsheet[]
 }
@@ -62,7 +62,7 @@ model SubCategory {
 model MonthlyFinance {
     id            Int           @id @default(autoincrement())
     subCategoryId Int
-    month         String
+    month         DateTime
     created_at    DateTime      @default(now())
     total_price   Int
     subCategory   SubCategory   @relation(fields: [subCategoryId], references: [id])
@@ -74,6 +74,7 @@ model Transaction {
     monthlyFinanceId Int
     item_name        String?
     price            Float
+    quantity         Int            @default(1)
     transaction_date DateTime
     monthlyFinance   MonthlyFinance @relation(fields: [monthlyFinanceId], references: [id])
 }

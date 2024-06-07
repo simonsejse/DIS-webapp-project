@@ -66,9 +66,9 @@ export default function Regnskab({}: Props) {
     }
 
     return (
-        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14 sm:pr-14">
             <MyBreadcrumb crumbs={crumbs} />
-            <div className="max-w-6xl mx-auto p-5 pt-10">
+            <div className="max-w-[1400px] mx-auto w-full p-5 pt-10">
                 <div className="flex justify-between items-center mb-5">
                     <h1 className="text-2xl text-gray-700 font-semibold">
                         Regnskab

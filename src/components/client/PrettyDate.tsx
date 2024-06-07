@@ -1,26 +1,23 @@
+import { format } from "date-fns";
+import { da } from "date-fns/locale";
+
 type Props = {
-    date: string;
+    dateStr: string;
+    className?: string;
 };
 
-export function PrettyDate(props: Props) {
-    const date = props.date;
+export function PrettyDate({ dateStr, className }: Props) {
     return (
-        <span>
-            {new Date(date).toLocaleDateString()}{" "}
-            {new Date(date).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-            })}
+        <span className={`${className || ""}`}>
+            {prettyDateAsString(dateStr)}
         </span>
     );
 }
 
-export function PrettyDateAsString(props: Props) {
-    const date = props.date;
-    return `${new Date(date).toLocaleDateString()} ${new Date(
-        date
-    ).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-    })}`;
+export function prettyDateAsString(dateStr: string) {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) {
+        return "Invalid date";
+    }
+    return format(date, "dd/MM/yyyy HH:mm", { locale: da });
 }

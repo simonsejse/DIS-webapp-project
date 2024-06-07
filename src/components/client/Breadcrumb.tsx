@@ -27,8 +27,11 @@ export default function MyBreadcrumb({ crumbs }: Props) {
                         <BreadcrumbList>
                             {crumbs.map((crumb, index) => {
                                 return (
-                                    <>
-                                        <BreadcrumbItem key={index}>
+                                    <div
+                                        key={index}
+                                        className="inline-flex items-center gap-1.5"
+                                    >
+                                        <BreadcrumbItem>
                                             <BreadcrumbLink asChild>
                                                 <Link href={crumb.href}>
                                                     {crumb.name}
@@ -38,7 +41,7 @@ export default function MyBreadcrumb({ crumbs }: Props) {
                                         {index < crumbs.length - 1 && (
                                             <BreadcrumbSeparator />
                                         )}
-                                    </>
+                                    </div>
                                 );
                             })}
                         </BreadcrumbList>
