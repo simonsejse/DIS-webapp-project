@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Spreadsheet" ADD COLUMN     "last_updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

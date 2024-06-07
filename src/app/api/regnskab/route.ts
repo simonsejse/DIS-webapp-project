@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
-import { ErrorResponseBuilder } from "@/lib/responseBuilder";
+import {
+  ErrorResponseBuilder,
+  SuccessResponseBuilder,
+} from "@/lib/responseBuilder";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -14,14 +17,14 @@ export async function POST(req: NextRequest) {
       .build();
   }
 
-    // beskrivelse må ikke være tom
-    // beskrivelse skal være mellem 0<beskrivelse<200 tegn
-    if (beskrivelse.length === 0 || beskrivelse.length > 200) {
-        return new ResponseBuilder()
-            .message("Beskrivelse skal være mellem 0 og 200 tegn")
-            .status(400)
-            .build();
-    }
+  // beskrivelse må ikke være tom
+  // beskrivelse skal være mellem 0<beskrivelse<200 tegn
+  if (beskrivelse.length === 0 || beskrivelse.length > 200) {
+    return new ErrorResponseBuilder()
+      .message("Beskrivelse skal være mellem 0 og 200 tegn")
+      .status(400)
+      .build();
+  }
 
   // nu kan der oprettes et regnskab
   const regnskab = {
@@ -43,16 +46,18 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-    const regnskaber = await prisma.spreadsheet.findMany();
-    const a = [
-        {
-            id: "728ed52f",
-            status: "igangværende",
-            navn: "Oversigt 2024",
-            created_at: "2024-01-01",
-            last_updated_at: "2024-01-01",
-        },
-    ];
-    return ResponseBuilder.create().body(a).build();
-    //return Response.json(regnskaber);
+  const regnskaber = await prisma.spreadsheet.findMany({
+    select: {
+      id: true,
+      status: true,
+      name: true,
+      created_at: true,
+      last_updated_at: true,
+    },
+  });
+  if (!regnskaber) {
+    return SuccessResponseBuilder.create().body([]).build();
+  }
+
+  return SuccessResponseBuilder.create().body(regnskaber).build();
 }

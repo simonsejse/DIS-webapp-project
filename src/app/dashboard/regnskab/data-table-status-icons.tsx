@@ -1,7 +1,7 @@
 import { Loader, CheckCircle, Lock } from "lucide-react";
 
 export type StatusSizes = "sm" | "md" | "lg";
-export type Status = "igangværende" | "færdig" | "lukket";
+export type Status = "OPEN" | "CLOSED";
 
 type Props = {
   status: Status;
@@ -10,11 +10,9 @@ type Props = {
 
 export function StatusIcon({ status, className }: Props) {
   switch (status) {
-    case "igangværende":
+    case "OPEN":
       return <Loader {...{ className }} />;
-    case "færdig":
-      return <CheckCircle {...{ className }} />;
-    case "lukket":
+    case "CLOSED":
       return <Lock {...{ className }} />;
     default:
       return <span>Unknown Status</span>;

@@ -1,62 +1,68 @@
 "use client";
 import React from "react";
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
 import { DataTable } from "./data-table";
 import { Payment, columns } from "./columns";
 import { Button } from "@/components/ui/button";
 import AddAccountingModal from "./add-regnskab-modal";
 import { useQuery } from "react-query";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import LoadingComponent from "@/components/client/LoadingComponent";
+import ErrorComponent from "@/components/client/ErrorComponent";
+import { ErrorResponse } from "@/lib/responseBuilder";
 
 type Props = {};
 
 type SuccessResponse = {
-    message: string;
-    data: Payment[];
+  message: string;
+  data: Payment[];
 };
 
-type ErrorResponse = {
-    message: string;
-};
-
-async function fetchPayments(): Promise<Payment[]> {
-    const response = await axios.get<SuccessResponse>("/api/regnskab");
-    return response.data.data;
+async function fetchPayments() {
+  const response = await axios.get<Payment[]>("/api/regnskab");
+  return response;
 }
 
 export default function Regnskab({}: Props) {
-    const { data, error, isLoading } = useQuery<
-        Payment[],
-        AxiosError<ErrorResponse>
-    >("regnskab", fetchPayments);
+  const { data, error, isLoading, isError } = useQuery<
+    AxiosResponse<Payment[]>,
+    AxiosError<ErrorResponse>
+  >({
+    queryKey: "accountings",
+    queryFn: fetchPayments,
+  });
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+  if (isLoading) {
+    return <LoadingComponent />;
+  }
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
-
+  if (isError && error.response?.data.ismajor) {
     return (
-        <div className="max-w-6xl mx-auto p-5 pt-10">
-            <div className="flex justify-between items-center mb-5">
-                <h1 className="text-2xl text-gray-700 font-semibold">
-                    Regnskab
-                </h1>
-                <AddAccountingModal />
-            </div>
-            <section className="mt-2">
-                <DataTable columns={columns} data={data || []} />
-            </section>
-        </div>
+      <ErrorComponent
+        error={
+          error.response?.data.message || "Der skete en uventet serverfejl"
+        }
+      />
     );
+  }
+  console.log(data?.data);
+  return (
+    <div className="max-w-6xl mx-auto p-5 pt-10">
+      <div className="flex justify-between items-center mb-5">
+        <h1 className="text-2xl text-gray-700 font-semibold">Regnskab</h1>
+        <AddAccountingModal />
+      </div>
+      <section className="mt-2">
+        <DataTable columns={columns} data={data?.data || []} />
+      </section>
+    </div>
+  );
 }

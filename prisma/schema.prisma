@@ -19,13 +19,14 @@ model User {
 }
 
 model Spreadsheet {
-    id           Int               @id @default(autoincrement())
-    name         String
-    description  String
-    status       SpreadsheetStatus @default(OPEN)
-    created_at   DateTime          @default(now())
-    categories   Category[]
-    spreadsheets UserSpreadsheet[]
+    id              Int               @id @default(autoincrement())
+    name            String
+    description     String
+    status          SpreadsheetStatus @default(OPEN)
+    created_at      DateTime          @default(now())
+    last_updated_at DateTime          @default(now())
+    categories      Category[]
+    spreadsheets    UserSpreadsheet[]
 }
 
 model UserSpreadsheet {

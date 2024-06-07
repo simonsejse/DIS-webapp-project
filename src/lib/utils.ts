@@ -27,20 +27,13 @@ function groupBy<T, K extends keyof any>(
 // from english to danish
 // key value map
 const translations = {
-    CLOSED: "Lukket",
-    OPEN: "Åben",
+  CLOSED: "Lukket",
+  OPEN: "Åben",
 };
-export function translator(text: string) {
+export class Translator {
+  static translate(text: string) {
     return translations[text as keyof typeof translations] || text;
-}
-
-type ErrorResponse = {
-  message: string;
-};
-export function isAxiosError(
-  error: unknown
-): error is AxiosError<ErrorResponse> {
-  return (error as AxiosError<ErrorResponse>).isAxiosError !== undefined;
+  }
 }
 
 export function parseNumber(value: string) {
