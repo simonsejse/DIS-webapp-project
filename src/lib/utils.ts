@@ -24,6 +24,16 @@ function groupBy<T, K extends keyof any>(
   }, {} as Record<K, T[]>);
 }
 
+// from english to danish
+// key value map
+const translations = {
+    CLOSED: "Lukket",
+    OPEN: "Åben",
+};
+export function translator(text: string) {
+    return translations[text as keyof typeof translations] || text;
+}
+
 type ErrorResponse = {
   message: string;
 };
