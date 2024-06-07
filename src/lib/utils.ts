@@ -30,6 +30,7 @@ const translations = {
   CLOSED: "Lukket",
   OPEN: "Åben",
 };
+
 export class Translator {
   static translate(text: string) {
     return translations[text as keyof typeof translations] || text;

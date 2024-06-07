@@ -31,6 +31,7 @@ import {
 import { headers } from "next/headers";
 import { StatusIcon } from "./data-table-status-icons";
 import { Translator } from "@/lib/utils";
+import { PrettyDate } from "@/components/client/PrettyDate";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -81,10 +82,12 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "created_at",
     header: "Oprettet",
+    cell: ({ row }) => <PrettyDate date={row.original.created_at} />,
   },
   {
     accessorKey: "last_updated_at",
     header: "Sidst opdateret",
+    cell: ({ row }) => <PrettyDate date={row.original.last_updated_at} />,
   },
   {
     id: "open_invoice",
