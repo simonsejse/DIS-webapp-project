@@ -5,6 +5,7 @@ import Dashboard from "@/components/client/Dashboard";
 import ErrorComponent from "@/components/client/ErrorComponent";
 import LoadingComponent from "@/components/client/LoadingComponent";
 import { PrettyDate, prettyDateAsString } from "@/components/client/PrettyDate";
+import { Badge } from "@/components/ui/badge";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ErrorResponse } from "@/lib/responseBuilder";
+import { Translator, placeValueIntoPlaceholder } from "@/lib/utils";
 import { SpreadsheetDTO } from "@/types/types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Link from "next/link";
@@ -72,20 +74,46 @@ export default function Page({ params }: Props) {
     if (!data?.data) return <ErrorComponent error="Data kunne ikke hentes" />;
 
     const spreadsheet = data.data;
-
+    const { stats } = extractSpreadsheetData(spreadsheet);
     return (
         <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14 sm:pr-14">
             <MyBreadcrumb crumbs={crumbs} />
             <Card>
                 <CardHeader>
-                    <div className="flex justify-between items-start space-x-6 p-4 bg-gray-100 rounded-lg">
-                        <div className="flex-1">
-                            <CardTitle className="text-xl font-bold text-gray-900">
-                                {spreadsheet.name}
-                            </CardTitle>
-                            <CardDescription className="text-gray-600">
-                                {spreadsheet.description}
-                            </CardDescription>
+                    <div className="flex justify-between items-start space-x-6 p-4 ">
+                        <div className="flex-1 p-6 ">
+                            <div className="mb-4">
+                                <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+                                    {spreadsheet.name}{" "}
+                                    {isOpen(spreadsheet.status) ? (
+                                        <GreenBadge className="ml-2" />
+                                    ) : (
+                                        <RedBadge className="ml-2" />
+                                    )}
+                                </h2>
+                                <p className="text-gray-600">
+                                    {spreadsheet.description}
+                                </p>
+                            </div>
+                            <div className="space-y-2 border-2 p-2 rounded-lg divide-y-2 divide-gray-200">
+                                {stats.map((stat, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex justify-between items-center pt-2"
+                                    >
+                                        <span className="text-lg text-gray-800">
+                                            {stat.title}
+                                        </span>
+                                        <span className="text-gray-900 font-semibold">
+                                            {placeValueIntoPlaceholder(
+                                                stat.format,
+                                                "%num",
+                                                stat.value
+                                            )}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                         <div className="p-4 rounded-lg">
                             <p className="text-md font-semibold text-gray-700 mb-1">
@@ -111,4 +139,55 @@ export default function Page({ params }: Props) {
             </Card>
         </div>
     );
+}
+
+const GreenBadge = ({ className }: { className?: string }) => {
+    return (
+        <Badge className={className || ""} variant="green-subtle">
+            Åben
+        </Badge>
+    );
+};
+
+const RedBadge = ({ className }: { className?: string }) => {
+    return (
+        <Badge className={className || ""} variant="red-subtle">
+            Lukket
+        </Badge>
+    );
+};
+
+function extractSpreadsheetData(spreadsheet: SpreadsheetDTO) {
+    const stats = [
+        {
+            title: "Rådighedsbeløb forrige måned",
+            value: 100,
+            format: "%num kr.",
+        },
+        {
+            title: "Rådighedsbeløb denne måned",
+            value: 200,
+            format: "%num kr.",
+        },
+        {
+            title: "Vækst for rådighedsbeløb i %",
+            value: 100,
+            format: "%num %",
+        },
+        {
+            title: "Rådighedsbeløb i gns.",
+            value: 150,
+            format: "%num kr.",
+        },
+        {
+            title: "Rådighedsbeløb i år",
+            value: 1800,
+            format: "%num kr.",
+        },
+    ];
+    return { stats };
+}
+
+function isOpen(status: string) {
+    return status === "OPEN";
 }
