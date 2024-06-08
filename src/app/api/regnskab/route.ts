@@ -1,9 +1,9 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma';
 import {
   ErrorResponseBuilder,
   SuccessResponseBuilder,
-} from "@/lib/responseBuilder";
-import { NextRequest } from "next/server";
+} from '@/lib/response-builder';
+import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const { navn, beskrivelse } = await req.json();
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   // navn skal være mellem 0<navn<50 tegn
   if (navn.length === 0 || navn.length > 50) {
     return new ErrorResponseBuilder()
-      .message("Navn skal være mellem 0 og 50 tegn")
+      .message('Navn skal være mellem 0 og 50 tegn')
       .status(400)
       .build();
   }
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   // beskrivelse skal være mellem 0<beskrivelse<200 tegn
   if (beskrivelse.length === 0 || beskrivelse.length > 200) {
     return new ErrorResponseBuilder()
-      .message("Beskrivelse skal være mellem 0 og 200 tegn")
+      .message('Beskrivelse skal være mellem 0 og 200 tegn')
       .status(400)
       .build();
   }
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     return new ErrorResponseBuilder()
-      .message("Der skete en fejl")
+      .message('Der skete en fejl')
       .status(500)
       .build();
   }

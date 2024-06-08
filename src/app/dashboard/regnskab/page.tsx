@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -8,16 +8,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { DataTable } from "./components/data-table";
-import { Payment, columns } from "./components/columns";
-import { Button } from "@/components/ui/button";
-import AddAccountingModal from "./components/add-regnskab-modal";
-import { useQuery } from "react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import LoadingComponent from "@/components/client/LoadingComponent";
-import ErrorComponent from "@/components/client/ErrorComponent";
-import { ErrorResponse } from "@/lib/responseBuilder";
+} from '@/components/ui/table';
+import { DataTable } from './components/data-table';
+import { Payment, columns } from './components/columns';
+import { Button } from '@/components/ui/button';
+import AddAccountingModal from './components/add-regnskab-modal';
+import { useQuery } from 'react-query';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import LoadingComponent from '@/components/client/LoadingComponent';
+import ErrorComponent from '@/components/client/ErrorComponent';
+import { ErrorResponse } from '@/lib/response-builder';
 
 type Props = {};
 
@@ -27,7 +27,7 @@ type SuccessResponse = {
 };
 
 async function fetchPayments() {
-  const response = await axios.get<Payment[]>("/api/regnskab");
+  const response = await axios.get<Payment[]>('/api/regnskab');
   return response;
 }
 
@@ -36,7 +36,7 @@ export default function Regnskab({}: Props) {
     AxiosResponse<Payment[]>,
     AxiosError<ErrorResponse>
   >({
-    queryKey: "accountings",
+    queryKey: 'accountings',
     queryFn: fetchPayments,
   });
 
@@ -48,7 +48,7 @@ export default function Regnskab({}: Props) {
     return (
       <ErrorComponent
         error={
-          error.response?.data.message || "Der skete en uventet serverfejl"
+          error.response?.data.message || 'Der skete en uventet serverfejl'
         }
       />
     );

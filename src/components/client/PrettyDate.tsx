@@ -1,3 +1,4 @@
+import { DateHelper } from "@/lib/utils";
 import { format } from "date-fns";
 import { da } from "date-fns/locale";
 
@@ -15,9 +16,5 @@ export function PrettyDate({ dateStr, className }: Props) {
 }
 
 export function prettyDateAsString(dateStr: string) {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) {
-        return "Invalid date";
-    }
-    return format(date, "dd/MM/yyyy HH:mm", { locale: da });
+    return DateHelper.formatPretty(dateStr);
 }

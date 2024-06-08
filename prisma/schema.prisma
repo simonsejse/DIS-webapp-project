@@ -65,7 +65,6 @@ model MonthlyFinance {
     subCategoryId Int
     month         DateTime
     created_at    DateTime      @default(now())
-    total_price   Int
     subCategory   SubCategory   @relation(fields: [subCategoryId], references: [id])
     transactions  Transaction[]
 }

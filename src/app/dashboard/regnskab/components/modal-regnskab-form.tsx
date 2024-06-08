@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
-import React from "react";
-import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosError } from "axios";
-import { useToast } from "@/components/ui/use-toast";
-import { ErrorResponse } from "@/lib/responseBuilder";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+import React from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import axios, { AxiosError } from 'axios';
+import { useToast } from '@/components/ui/use-toast';
+import { ErrorResponse } from '@/lib/response-builder';
 
 type FormOption = {
   label: string;
@@ -25,25 +25,25 @@ type SuccessResponse = {
 };
 
 const FormOptions: FormOption[] = [
-  { label: "Navn", defaultValue: "Regnskab 2024", id: "navn", type: "text" },
+  { label: 'Navn', defaultValue: 'Regnskab 2024', id: 'navn', type: 'text' },
   {
-    label: "Beskrivelse",
-    defaultValue: "Oversigt over regnskab 2024",
-    id: "beskrivelse",
-    type: "textarea",
+    label: 'Beskrivelse',
+    defaultValue: 'Oversigt over regnskab 2024',
+    id: 'beskrivelse',
+    type: 'textarea',
   },
 ];
 
 export default function AccountingForm({
   className,
   closeModal,
-}: React.ComponentProps<"form"> & { closeModal: () => void }) {
+}: React.ComponentProps<'form'> & { closeModal: () => void }) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = React.useState({
-    navn: "Regnskab 2024",
-    beskrivelse: "Oversigt over regnskab 2024",
+    navn: 'Regnskab 2024',
+    beskrivelse: 'Oversigt over regnskab 2024',
   });
 
   const handleChange = (
@@ -64,23 +64,23 @@ export default function AccountingForm({
     FormData
   >(
     async (formData: FormData) => {
-      const response = await axios.post("/api/regnskab", formData);
+      const response = await axios.post('/api/regnskab', formData);
       return response.data;
     },
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries({ queryKey: ["accountings"] });
+        queryClient.invalidateQueries({ queryKey: ['accountings'] });
         toast({
-          title: "Success!",
+          title: 'Success!',
           description: data.message,
-          variant: "default",
+          variant: 'default',
         });
       },
       onError: (error) => {
         toast({
-          title: "Error!",
+          title: 'Error!',
           description: error.response?.data.message,
-          variant: "destructive",
+          variant: 'destructive',
         });
       },
     }
@@ -98,7 +98,7 @@ export default function AccountingForm({
 
   return (
     <form
-      className={cn("grid items-start gap-4", className)}
+      className={cn('grid items-start gap-4', className)}
       onSubmit={handleSubmit}
     >
       {FormOptions.map((option) => (
@@ -109,7 +109,7 @@ export default function AccountingForm({
           >
             {option.label}
           </Label>
-          {option.type === "textarea" ? (
+          {option.type === 'textarea' ? (
             <textarea
               id={option.id}
               value={formData[option.id as keyof typeof formData]}

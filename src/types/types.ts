@@ -11,7 +11,7 @@
 // Partial: PartialSpreadsheetDTO, PartialCategoryDTO
 // Minimal: MinimalSpreadsheetDTO, MinimalCategoryDTO
 
-type RoleDTO = "admin" | "user";
+type RoleDTO = 'admin' | 'user';
 
 export type UserDTO = {
   id: number;
@@ -55,7 +55,6 @@ export type MonthlyFinanceDTO = {
   month: string;
   year: number;
   created_at: string;
-  total_price: number;
   transactions: TransactionDTO[];
 };
 
