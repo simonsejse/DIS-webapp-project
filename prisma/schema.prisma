@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-    id           Int               @id @default(autoincrement())
-    email        String            @unique
-    created_at   DateTime          @default(now())
-    first_name   String
-    last_name    String
-    password     String
-    role         Role              @default(USER)
-    spreadsheets UserSpreadsheet[]
+    id                           Int               @id @default(autoincrement())
+    email                        String            @unique
+    created_at                   DateTime          @default(now())
+    first_name                   String
+    last_name                    String
+    password                     String
+    role                         Role              @default(USER)
+    spreadsheets                 UserSpreadsheet[]
+    avg_monthly_available_amount Int               @default(0)
 }
 
 model Spreadsheet {

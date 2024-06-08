@@ -11,50 +11,79 @@
 // Partial: PartialSpreadsheetDTO, PartialCategoryDTO
 // Minimal: MinimalSpreadsheetDTO, MinimalCategoryDTO
 
+type RoleDTO = "admin" | "user";
+
+export type UserDTO = {
+  id: number;
+  email: string;
+  created_at: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  role: RoleDTO;
+  spreads: SpreadsheetDTO[];
+  avg_monthly_available_amount: number;
+};
+
+export type UserPartialDTO = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  spreads: SpreadsheetDTO[];
+  avg_monthly_available_amount: number;
+};
+
+export type UserMinimalDTO = {
+  id: number;
+  spreads: SpreadsheetDTO[];
+  avg_monthly_available_amount: number;
+};
+
 export type TransactionDTO = {
-    id: number;
-    monthlyFinanceId: number;
-    item_name: string;
-    price: number;
-    quantity: number;
-    transaction_date: string;
+  id: number;
+  monthlyFinanceId: number;
+  item_name: string;
+  price: number;
+  quantity: number;
+  transaction_date: string;
 };
 
 export type MonthlyFinanceDTO = {
-    id: number;
-    subCategoryId: number;
-    month: string;
-    year: number;
-    created_at: string;
-    total_price: number;
-    transactions: TransactionDTO[];
+  id: number;
+  subCategoryId: number;
+  month: string;
+  year: number;
+  created_at: string;
+  total_price: number;
+  transactions: TransactionDTO[];
 };
 
 export type SubcategoryDTO = {
-    id: number;
-    categoryId: number;
-    title: string;
-    description?: string;
-    created_at: string;
-    monthlyFinances: MonthlyFinanceDTO[];
+  id: number;
+  categoryId: number;
+  title: string;
+  description?: string;
+  created_at: string;
+  monthlyFinances: MonthlyFinanceDTO[];
 };
 
 export type CategoryDTO = {
-    id: number;
-    spreadsheetId: number;
-    title: string;
-    description: string;
-    current_date: string;
-    created_at: string;
-    subcategories: SubcategoryDTO[];
+  id: number;
+  spreadsheetId: number;
+  title: string;
+  description: string;
+  current_date: string;
+  created_at: string;
+  subcategories: SubcategoryDTO[];
 };
 
 export type SpreadsheetDTO = {
-    id: number;
-    name: string;
-    description: string;
-    status: string;
-    created_at: string;
-    last_updated_at: string;
-    categories: CategoryDTO[];
+  id: number;
+  name: string;
+  description: string;
+  status: string;
+  created_at: string;
+  last_updated_at: string;
+  categories: CategoryDTO[];
 };
