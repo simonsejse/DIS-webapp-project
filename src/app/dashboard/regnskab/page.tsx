@@ -9,10 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DataTable } from "./data-table";
-import { Payment, columns } from "./columns";
+import { DataTable } from "./components/data-table";
+import { Payment, columns } from "./components/columns";
 import { Button } from "@/components/ui/button";
-import AddAccountingModal from "./add-regnskab-modal";
+import AddAccountingModal from "./components/add-regnskab-modal";
 import { useQuery } from "react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import LoadingComponent from "@/components/client/LoadingComponent";

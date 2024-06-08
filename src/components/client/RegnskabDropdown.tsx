@@ -19,16 +19,19 @@ import {
     Printer,
     Tag,
     Trash,
+    EllipsisVertical,
 } from "lucide-react";
-import { StatusIcon } from "@/app/dashboard/regnskab/data-table-status-icons";
+import { StatusIcon } from "@/app/dashboard/regnskab/components/data-table-status-icons";
 
 type Props = {
+    isVertical: boolean;
     onClickLabelOpen: () => void;
     onClickLabelClosed: () => void;
     onClickDelete: () => void;
 };
 
 export default function RegnskabDropdown({
+    isVertical,
     onClickLabelOpen,
     onClickLabelClosed,
     onClickDelete,
@@ -38,7 +41,7 @@ export default function RegnskabDropdown({
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">
                     <span className="sr-only">Open menu</span>
-                    <MoreHorizontal className="h-4 w-4" />
+                    {isVertical ? <EllipsisVertical /> : <MoreHorizontal />}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
