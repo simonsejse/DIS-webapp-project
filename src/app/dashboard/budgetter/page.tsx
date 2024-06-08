@@ -12,7 +12,7 @@ const WorkInProgressPage: React.FC<Props> = () => {
           Work In Progress
         </h1>
         <p className="text-gray-700 text-lg mb-4">
-          Indstillinger er nuværende under arbejde.
+          Budgetter er nuværende under arbejde.
         </p>
         <p className="text-gray-500">
           Vend venligst tilbage senere eller kontakt support, hvis du har brug
