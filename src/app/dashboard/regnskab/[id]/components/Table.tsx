@@ -13,10 +13,15 @@ import {
   getTransactionsTotal,
 } from '@/lib/spreadsheet-helper';
 import { Month } from 'date-fns';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
+import { IconButton, Tooltip } from '@mui/material';
+import AddCatAndSubcat from './add-cat-and-subcat';
 
 type Props = {
   category: CategoryDTO;
-  handleOnCellClick: (mthfinance: number) => void;
+  handleOnCellClick: (month: string, subcat: number) => void;
+  handleOpenSubcatModal: (category: number) => void;
 };
 
 const columns = [
@@ -35,7 +40,11 @@ const columns = [
   { Header: 'December' },
 ];
 
-export default function MyTable({ category, handleOnCellClick }: Props) {
+export default function MyTable({
+  category,
+  handleOnCellClick,
+  handleOpenSubcatModal,
+}: Props) {
   return (
     <TableContainer>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -103,15 +112,13 @@ export default function MyTable({ category, handleOnCellClick }: Props) {
                   key={colIndex}
                   align="right"
                   onClick={() =>
-                    handleOnCellClick(subcat.monthlyFinances[colIndex]?.id)
+                    handleOnCellClick(lower(column.Header), subcat.id)
                   }
                   className="hover:bg-gray-100 transition-colors duration-200 ease-in-out cursor-pointer transform active:scale-90 max-w-[100px] min-w-[100px] text-wrap"
                 >
                   {getTransactionsTotal(
                     subcat.monthlyFinances.find(
-                      (finance) =>
-                        DateHelper.extractMonth(finance.month) ===
-                        lower(column.Header)
+                      (finance) => finance.month === lower(column.Header)
                     )
                   )}{' '}
                   kr.
@@ -119,6 +126,11 @@ export default function MyTable({ category, handleOnCellClick }: Props) {
               ))}
             </TableRow>
           ))}
+          <AddCatAndSubcat
+            title="Tilføj underkategori"
+            onClick={() => handleOpenSubcatModal(category.id)}
+            size="small"
+          />
         </TableBody>
       </Table>
     </TableContainer>

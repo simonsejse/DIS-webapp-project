@@ -42,6 +42,9 @@ import {
 import RegnskabDropdown from '@/components/client/RegnskabDropdown';
 import Table from './components/Table';
 import AddTransModal from './components/add-trans-modal';
+import AddCatAndSubcat from './components/add-cat-and-subcat';
+import AddSubCatModalForm from './components/add-subcat-modal';
+import AddCatModalForm from './components/add-cat-modal';
 
 type Props = {
   params: {
@@ -52,13 +55,22 @@ type Props = {
 export default function Page({ params }: Props) {
   const regnskabId = parseNumber(params.id);
 
-  const [activeMonthlyFinanceId, setActiveMonthlyFinanceId] = React.useState<
+  const [activeCategory, setActiveCategory] = React.useState<
     number | undefined
   >();
-  const [open, setOpen] = React.useState(false);
-  const handleOnCellClick = (mthfinance: number) => {
-    setActiveMonthlyFinanceId(mthfinance);
-    setOpen(true);
+  const [actMonFin, setActMonFin] = React.useState<string | undefined>();
+  const [actSubCat, setActSubCat] = React.useState<number | undefined>();
+  const [openTrans, setOpenTrans] = React.useState(false);
+  const [openSubCat, setOpenSubCat] = React.useState(false);
+  const [openCat, setOpenCat] = React.useState(false);
+  const handleOnCellClick = (month: string, subcat: number) => {
+    setActSubCat(subcat);
+    setActMonFin(month);
+    setOpenTrans(true);
+  };
+  const handleOpenSubcatModal = (category: number) => {
+    setOpenSubCat(true);
+    setActiveCategory(category);
   };
   const fetchSpreadsheet = async () => {
     const response = await axios.get<SpreadsheetDTO>(
@@ -117,6 +129,7 @@ export default function Page({ params }: Props) {
     name: category.title,
     content: (
       <Table
+        handleOpenSubcatModal={handleOpenSubcatModal}
         handleOnCellClick={handleOnCellClick}
         key={category.id}
         category={category}
@@ -126,11 +139,23 @@ export default function Page({ params }: Props) {
 
   return (
     <>
-      <AddTransModal
-        open={open}
-        setOpen={setOpen}
+      <AddCatModalForm
+        open={openCat}
+        setOpen={setOpenCat}
         regnskabId={regnskabId}
-        activeMonthlyFinanceId={activeMonthlyFinanceId}
+      />
+      <AddSubCatModalForm
+        open={openSubCat}
+        setOpen={setOpenSubCat}
+        categoryId={activeCategory}
+        regnskabId={regnskabId}
+      />
+      <AddTransModal
+        open={openTrans}
+        setOpen={setOpenTrans}
+        regnskabId={regnskabId}
+        actMonFin={actMonFin}
+        subcat={actSubCat}
       />
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14 sm:pr-14">
         <MyBreadcrumb crumbs={crumbs} />
@@ -210,7 +235,13 @@ export default function Page({ params }: Props) {
               </Accordion>
             ))}
           </CardContent>
-          <CardFooter>Hej</CardFooter>
+          <CardFooter>
+            <AddCatAndSubcat
+              title="Tilføj kategori"
+              size="large"
+              onClick={() => setOpenCat(true)}
+            />
+          </CardFooter>
         </Card>
       </div>
     </>

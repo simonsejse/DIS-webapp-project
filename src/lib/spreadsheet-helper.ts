@@ -14,7 +14,7 @@ export const getMonthlyTotals = (
 ): number => {
   return subcategories.reduce((sum, subcat) => {
     const monthlyFinance = subcat.monthlyFinances.find(
-      (finance) => DateHelper.extractMonth(finance.month) === month
+      (finance) => finance.month === month
     );
     return sum + (monthlyFinance ? getTransactionsTotal(monthlyFinance) : 0);
   }, 0);

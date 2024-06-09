@@ -3,14 +3,13 @@ import {
   ErrorResponseBuilder,
   SuccessResponseBuilder,
 } from '@/lib/response-builder';
+import { MonthlyFinance } from '@prisma/client';
 
 export async function POST(req: Request): Promise<Response> {
-  const { regnskabId, activeMonthlyFinanceId, name, price, quantity } =
+  const { regnskabId, actMonFin, subcat, name, price, quantity } =
     await req.json();
 
-  console.log(regnskabId, activeMonthlyFinanceId, name, price, quantity);
-
-  if (!regnskabId || !name || !price || !quantity) {
+  if (!regnskabId || !actMonFin || !name || !price || !quantity) {
     return ErrorResponseBuilder.create()
       .status(400)
       .message('Du mangler at udfylde et eller flere felter.')
@@ -28,6 +27,36 @@ export async function POST(req: Request): Promise<Response> {
       .build();
   }
 
+  // check if monthly finance exists and if then find the id
+  const monthlyFinance = await prisma.monthlyFinance.findFirst({
+    where: {
+      subCategoryId: subcat,
+      month: actMonFin,
+    },
+  });
+  if (!monthlyFinance) {
+    // create a new monthly finance
+    const newMonthlyFinance = await prisma.monthlyFinance.create({
+      data: {
+        month: actMonFin,
+        subCategoryId: subcat,
+      },
+    });
+    return createTransaction(
+      newMonthlyFinance,
+      name,
+      parsedPrice,
+      parsedQuantity
+    );
+  }
+  return createTransaction(monthlyFinance, name, parsedPrice, parsedQuantity);
+}
+async function createTransaction(
+  monthlyFinance: MonthlyFinance,
+  name: string,
+  parsedPrice: number,
+  parsedQuantity: number
+) {
   try {
     await prisma.transaction.create({
       data: {
@@ -35,9 +64,13 @@ export async function POST(req: Request): Promise<Response> {
         price: parsedPrice,
         quantity: parsedQuantity,
         transaction_date: new Date(), // TODO: make user date input in trans-modal-form
-        monthlyFinanceId: activeMonthlyFinanceId,
+        monthlyFinanceId: monthlyFinance.id,
       },
     });
+    return SuccessResponseBuilder.create()
+      .status(201)
+      .message(`Din transaktionen ${parsedQuantity}x ${name} blev oprettet.`)
+      .build();
   } catch (error) {
     console.error(error);
     return ErrorResponseBuilder.create()
@@ -45,8 +78,4 @@ export async function POST(req: Request): Promise<Response> {
       .message('Der skete en uventet fejl.')
       .build();
   }
-  return SuccessResponseBuilder.create()
-    .status(201)
-    .message(`Din transaktionen ${parsedQuantity}x ${name} blev oprettet.`)
-    .build();
 }
