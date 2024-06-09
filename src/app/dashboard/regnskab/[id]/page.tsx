@@ -23,7 +23,11 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { ErrorResponse } from '@/lib/response-builder';
-import { Translator, placeValueIntoPlaceholder } from '@/lib/utils';
+import {
+  Translator,
+  parseNumber,
+  placeValueIntoPlaceholder,
+} from '@/lib/utils';
 import { MonthlyFinanceDTO, SpreadsheetDTO } from '@/types/types';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import Link from 'next/link';
@@ -46,15 +50,20 @@ type Props = {
 };
 
 export default function Page({ params }: Props) {
-  const [monthlyFinance, setMonthlyFinance] =
-    React.useState<MonthlyFinanceDTO>();
+  const regnskabId = parseNumber(params.id);
+
+  const [activeMonthlyFinanceId, setActiveMonthlyFinanceId] = React.useState<
+    number | undefined
+  >();
   const [open, setOpen] = React.useState(false);
-  const handleOnCellClick = (mthfinance: MonthlyFinanceDTO) => {
-    setMonthlyFinance(mthfinance);
+  const handleOnCellClick = (mthfinance: number) => {
+    setActiveMonthlyFinanceId(mthfinance);
     setOpen(true);
   };
-  const fetchSpreadsheet = async (id: string) => {
-    const response = await axios.get<SpreadsheetDTO>(`/api/regnskab/${id}`);
+  const fetchSpreadsheet = async () => {
+    const response = await axios.get<SpreadsheetDTO>(
+      `/api/regnskab/${regnskabId}`
+    );
     console.log(response.data);
     return response;
   };
@@ -63,8 +72,9 @@ export default function Page({ params }: Props) {
     AxiosResponse<SpreadsheetDTO>,
     AxiosError<ErrorResponse>
   >({
-    queryKey: ['spreadsheet', params.id],
-    queryFn: () => fetchSpreadsheet(params.id),
+    queryKey: ['spreadsheet', regnskabId],
+    queryFn: () => fetchSpreadsheet(),
+    staleTime: 0,
   });
   if (isLoading) return <LoadingComponent />;
   if (isError && error.response?.data.ismajor)
@@ -81,7 +91,7 @@ export default function Page({ params }: Props) {
     { name: 'Regnskab', href: '/dashboard/regnskab' },
     {
       name: data?.data.name || 'Udefineret',
-      href: `/dashboard/regnskab/${params.id}`,
+      href: `/dashboard/regnskab/${regnskabId}`,
     },
   ];
 
@@ -91,15 +101,15 @@ export default function Page({ params }: Props) {
   const { stats } = extractSpreadsheetData(spreadsheet);
 
   const handleRegnskabClose = async () => {
-    const response = await axios.post(`/api/regnskab/${params.id}/close`);
+    const response = await axios.post(`/api/regnskab/${regnskabId}/close`);
     console.log(response.data);
   };
   const handleRegnskabOpen = async () => {
-    const response = await axios.post(`/api/regnskab/${params.id}/open`);
+    const response = await axios.post(`/api/regnskab/${regnskabId}/open`);
     console.log(response.data);
   };
   const handleRegnskabDelete = async () => {
-    const response = await axios.delete(`/api/regnskab/${params.id}`);
+    const response = await axios.delete(`/api/regnskab/${regnskabId}`);
     console.log(response.data);
   };
 
@@ -116,7 +126,12 @@ export default function Page({ params }: Props) {
 
   return (
     <>
-      <AddTransModal open={open} setOpen={setOpen} />
+      <AddTransModal
+        open={open}
+        setOpen={setOpen}
+        regnskabId={regnskabId}
+        activeMonthlyFinanceId={activeMonthlyFinanceId}
+      />
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14 sm:pr-14">
         <MyBreadcrumb crumbs={crumbs} />
         <Card>

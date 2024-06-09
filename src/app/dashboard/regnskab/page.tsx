@@ -19,19 +19,12 @@ import LoadingComponent from '@/components/client/LoadingComponent';
 import ErrorComponent from '@/components/client/ErrorComponent';
 import { ErrorResponse } from '@/lib/response-builder';
 
-type Props = {};
-
-type SuccessResponse = {
-  message: string;
-  data: Payment[];
-};
-
 async function fetchPayments() {
   const response = await axios.get<Payment[]>('/api/regnskab');
   return response;
 }
 
-export default function Regnskab({}: Props) {
+export default function Regnskab() {
   const { data, error, isLoading, isError } = useQuery<
     AxiosResponse<Payment[]>,
     AxiosError<ErrorResponse>

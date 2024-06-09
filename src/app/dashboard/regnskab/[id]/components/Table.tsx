@@ -16,7 +16,7 @@ import { Month } from 'date-fns';
 
 type Props = {
   category: CategoryDTO;
-  handleOnCellClick: (mthfinance: MonthlyFinanceDTO) => void;
+  handleOnCellClick: (mthfinance: number) => void;
 };
 
 const columns = [
@@ -103,7 +103,7 @@ export default function MyTable({ category, handleOnCellClick }: Props) {
                   key={colIndex}
                   align="right"
                   onClick={() =>
-                    handleOnCellClick(subcat.monthlyFinances[colIndex])
+                    handleOnCellClick(subcat.monthlyFinances[colIndex]?.id)
                   }
                   className="hover:bg-gray-100 transition-colors duration-200 ease-in-out cursor-pointer transform active:scale-90 max-w-[100px] min-w-[100px] text-wrap"
                 >

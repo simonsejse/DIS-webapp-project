@@ -9,23 +9,36 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import TransModalForm from './trans-modal-form';
 
 type Props = {
   open: boolean;
   setOpen: (open: boolean) => void;
+  activeMonthlyFinanceId: number | undefined;
+  regnskabId: number;
 };
 
-export default function AddTransModal({ open, setOpen }: Props) {
+export default function AddTransModal({
+  open,
+  setOpen,
+  activeMonthlyFinanceId,
+  regnskabId,
+}: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Tilføj Ny Transaktion</DialogTitle>
+          <DialogTitle>Tilføj ny transaktion</DialogTitle>
           <DialogDescription>
             Her kan du tilføje en ny transaktion. Klik på 'Opret', når du er
             færdig.
           </DialogDescription>
         </DialogHeader>
+        <TransModalForm
+          closeModal={() => setOpen(false)}
+          activeMonthlyFinanceId={activeMonthlyFinanceId}
+          regnskabId={regnskabId}
+        />
       </DialogContent>
     </Dialog>
   );

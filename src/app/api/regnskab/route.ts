@@ -32,17 +32,16 @@ export async function POST(req: NextRequest) {
     description: beskrivelse,
   };
   try {
-    await prisma.spreadsheet.create({
+    const res = await prisma.spreadsheet.create({
       data: regnskab,
     });
+    return SuccessResponseBuilder.create().body(res).build();
   } catch (error) {
     return new ErrorResponseBuilder()
       .message('Der skete en fejl')
       .status(500)
       .build();
   }
-
-  return Response.json({ navn, beskrivelse });
 }
 
 export async function GET() {

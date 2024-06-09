@@ -41,7 +41,7 @@ export default function AccountingForm({
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<FormData>({
     navn: 'Regnskab 2024',
     beskrivelse: 'Oversigt over regnskab 2024',
   });
