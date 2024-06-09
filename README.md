@@ -52,7 +52,7 @@ The web application is currently in the early stages of development due to our a
 A restriction right now is, that it is not possible to delete a transaction or categories/subcategories.
 
 ## ER-Diagram
-![Database ER diagram (crow's foot) (3)](https://github.com/simonsejse/dis-webapp-project/assets/40537287/68817393-68b1-4f01-b8b3-792c2c6a8758)
+<img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/68817393-68b1-4f01-b8b3-792c2c6a8758" alt="Database ER diagram" width="600" height="400">
 
 
 ## Use of regular expressions
