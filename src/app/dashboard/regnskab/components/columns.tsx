@@ -75,8 +75,17 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: 'navn',
     header: 'Navn',
     cell: ({ row }) => (
-      <div className="w-[250px]">
+      <div className="w-[200px] text-wrap">
         <span>{row.original.name}</span>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'beskrivelse',
+    header: 'Beskrivelse',
+    cell: ({ row }) => (
+      <div className="w-[250px] text-wrap">
+        <span>{row.original.description}</span>
       </div>
     ),
   },

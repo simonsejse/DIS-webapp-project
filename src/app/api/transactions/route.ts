@@ -8,7 +8,9 @@ export async function POST(req: Request): Promise<Response> {
   const { regnskabId, activeMonthlyFinanceId, name, price, quantity } =
     await req.json();
 
-  if (!regnskabId || !activeMonthlyFinanceId || !name || !price || !quantity) {
+  console.log(regnskabId, activeMonthlyFinanceId, name, price, quantity);
+
+  if (!regnskabId || !name || !price || !quantity) {
     return ErrorResponseBuilder.create()
       .status(400)
       .message('Du mangler at udfylde et eller flere felter.')
