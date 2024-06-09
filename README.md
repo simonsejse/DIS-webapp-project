@@ -34,6 +34,12 @@ If you need to manually add data or view the database, you can run Prisma Studio
 npx prisma studio
 ```
 
+## Interact with the app
+Text
+
+## ER-Diagram
+Image here
+
 ## Prerequisites
 
 - Node.js
