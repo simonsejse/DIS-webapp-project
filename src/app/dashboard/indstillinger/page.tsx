@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react';
+import WorkInProgressPage from '@/components/client/WIP';
 
 type Props = {};
 
-export default function Page(props: Props) {
-  return (
-    <section className="h-full">
-      <h1>indstillinger</h1>
-    </section>
-  );
-}
+const SettingsPage: React.FC<Props> = () => {
+  return <WorkInProgressPage pagename="Indstillinger" />;
+};
+
+export default SettingsPage;
