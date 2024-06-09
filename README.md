@@ -51,6 +51,8 @@ The web application is currently in the early stages of development due to our a
 
 Currently, the app has a limitation: it does not allow users to delete transactions or categories/subcategories. The dashboard also does not show any real values from the database and is also a future feature for the project.
 
+To make it easier for the TA's and lectors to navigate and get an overview of the features, we have created a test-user, which has already been set up with basic data; username: test@gmail.com, password: testing123
+
 ### Log-in / sign-up page
 <img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/07c1d5c0-902c-4ab8-8ac3-7dc5f0a1bff8" alt="Log-in / sign-up page" style="transform: scale(0.7);">
 
