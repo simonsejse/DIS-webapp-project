@@ -53,7 +53,7 @@ Currently, the app has a limitation: it does not allow users to delete transacti
 
 To make it easier for the TA's and lectors to navigate and get an overview of the features, we have created a test-user, which has already been set up with basic data; username: test@gmail.com, password: testing123
 
-This test log-in can be used on the online page, we have set up for the project: http://159.223.237.95/
+The user has data put into regnskab "Regnskab 2024" and "Vennegruppen 2024" and can be used on the online page, we have set up for the project: http://159.223.237.95/
 
 ### Log-in / sign-up page
 <img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/07c1d5c0-902c-4ab8-8ac3-7dc5f0a1bff8" alt="Log-in / sign-up page" style="transform: scale(0.7);">
@@ -61,8 +61,13 @@ This test log-in can be used on the online page, we have set up for the project:
 ### Dashboard page
 <img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/1c9347b6-7644-406a-9a08-272956f50b0e" alt="Dashboard page" style="transform: scale(0.7);">
 
-### Regnskaber / spreadsheet page
-Image here
+### Regnskaber page
+<img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/00309be1-218c-41ae-b2bb-3c44ed131d14" alt="Dashboard page" style="transform: scale(0.7);">
+
+### Spreadsheet page
+<img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/809cbed6-c97f-42af-be44-f6cb73952f0b" alt="Dashboard page" style="transform: scale(0.7);">
+
+
 
 ## ER-Diagram
 <img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/021a000a-44fc-4d87-856a-fa4af9aca596" alt="Database ER diagram" style="transform: scale(0.3);">
