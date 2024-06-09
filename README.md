@@ -2,7 +2,7 @@
 ## The web application
 The project focuses on simplifying financial management. The app enables users to effortlessly create accounting spreadsheets tailored to specific purposes. Each user can create categories and subcategories within these spreadsheets. Users can add transactions to specific subcategories, making it easy to see which categories incur the most and least expenses. This feature significantly simplifies personal financial management. Additionally, the app includes a comprehensive dashboard that summarizes analytics of the imported data.
 
-In the future, the app aims to support custom budget creation, set specific financial goals, generate various reports, and adjust a range of settings to further enhance ease of financial management. The dashboard also does not show any real values from the database and is also a future feature for the project.
+In the future, the app aims to support custom budget creation, set specific financial goals, generate various reports, and adjust a range of settings to further enhance ease of financial management. 
 
 ## Run the application
 To run the app, firstly, set up Docker by pulling the PostgreSQL image:
@@ -49,7 +49,7 @@ The web application is currently in the early stages of development due to our a
 - Add categories and subcategories to the spreadsheet using the '+' buttons located under the tables
 - Add transactions to subcategories by clicking on the corresponding cell for the specific category, which will update the table
 
-Currently, the app has a limitation: it does not allow users to delete transactions or categories/subcategories.
+Currently, the app has a limitation: it does not allow users to delete transactions or categories/subcategories. The dashboard also does not show any real values from the database and is also a future feature for the project.
 
 ## ER-Diagram
 <img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/6b7fe028-40fd-4e40-ae22-4bb68140cc82" alt="Database ER diagram" width="827" height="682">
