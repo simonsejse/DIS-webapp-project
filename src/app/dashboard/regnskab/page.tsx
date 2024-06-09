@@ -1,4 +1,5 @@
-import React from "react";
+'use client';
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -7,128 +8,45 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { DataTable } from "./data-table";
-import { Payment, columns } from "./columns";
-import { Button } from "@/components/ui/button";
-import AddAccountingModal from "./add-regnskab-modal";
+} from '@/components/ui/table';
+import { DataTable } from './components/data-table';
+import { Payment, columns } from './components/columns';
+import { Button } from '@/components/ui/button';
+import AddAccountingModal from './components/add-regnskab-modal';
+import { useQuery } from 'react-query';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import LoadingComponent from '@/components/client/LoadingComponent';
+import ErrorComponent from '@/components/client/ErrorComponent';
+import { ErrorResponse } from '@/lib/response-builder';
 
-type Props = {};
-
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      status: "igangværende",
-      navn: "Oversigt 2024",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "færdig",
-      navn: "Oversigt 2023",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "Oversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "lukket",
-      navn: "aOversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    {
-      id: "728ed52fd",
-      status: "igangværende",
-      navn: "Æversigt 2022",
-      created_at: "2024-01-01",
-      last_updated_at: "2024-01-01",
-    },
-    // ...
-  ];
+async function fetchPayments() {
+  const response = await axios.get<Payment[]>('/api/regnskab');
+  return response;
 }
 
-export default async function Regnskab({}: Props) {
-  const data = await getData();
+export default function Regnskab() {
+  const { data, error, isLoading, isError } = useQuery<
+    AxiosResponse<Payment[]>,
+    AxiosError<ErrorResponse>
+  >({
+    queryKey: 'accountings',
+    queryFn: fetchPayments,
+  });
+
+  if (isLoading) {
+    return <LoadingComponent />;
+  }
+
+  if (isError && error.response?.data.ismajor) {
+    return (
+      <ErrorComponent
+        error={
+          error.response?.data.message || 'Der skete en uventet serverfejl'
+        }
+      />
+    );
+  }
+  console.log(data?.data);
   return (
     <div className="max-w-6xl mx-auto p-5 pt-10">
       <div className="flex justify-between items-center mb-5">
@@ -136,7 +54,7 @@ export default async function Regnskab({}: Props) {
         <AddAccountingModal />
       </div>
       <section className="mt-2">
-        <DataTable columns={columns} data={data} />
+        <DataTable columns={columns} data={data?.data || []} />
       </section>
     </div>
   );

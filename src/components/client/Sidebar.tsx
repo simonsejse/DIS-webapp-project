@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 import {
   LayoutDashboard,
@@ -10,45 +10,45 @@ import {
   Settings,
   Ellipsis,
   Calculator,
-} from "lucide-react";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import LogoText from "./LogoText";
+} from 'lucide-react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import LogoText from './LogoText';
 
 const MenuItems = [
   {
-    name: "Dashboard",
-    path: "/",
+    name: 'Dashboard',
+    path: '/',
     icon: LayoutDashboard,
   },
   {
-    name: "Regnskab",
-    path: "/dashboard/regnskab",
+    name: 'Regnskab',
+    path: '/dashboard/regnskab',
     icon: Calculator,
   },
   {
-    name: "Transaktioner",
-    path: "/dashboard/transaktioner",
+    name: 'Transaktioner (WIP)',
+    path: '/dashboard/transaktioner',
     icon: BadgeDollarSign,
   },
   {
-    name: "Budgetter",
-    path: "/dashboard/budgetter",
+    name: 'Budgetter (WIP)',
+    path: '/dashboard/budgetter',
     icon: PieChart,
   },
   {
-    name: "Mål",
-    path: "/dashboard/mal",
+    name: 'Mål (WIP)',
+    path: '/dashboard/mal',
     icon: Target,
   },
   {
-    name: "Rapporter",
-    path: "/dashboard/rapporter",
+    name: 'Rapporter (WIP)',
+    path: '/dashboard/rapporter',
     icon: FileText,
   },
   {
-    name: "Indstillinger",
-    path: "/dashboard/indstillinger",
+    name: 'Indstillinger (WIP)',
+    path: '/dashboard/indstillinger',
     icon: Settings,
   },
 ];
