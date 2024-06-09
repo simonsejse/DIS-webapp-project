@@ -49,7 +49,7 @@ The web application is currently in the early stages of development due to our a
 - Add categories and subcategories to the spreadsheet using the '+' buttons located under the tables
 - Add transactions to subcategories by clicking on the corresponding cell for the specific category, which will update the table
 
-It is not possible to delete a transaction or categories/subcategories.
+A restriction right now is, that it is not possible to delete a transaction or categories/subcategories.
 
 ## ER-Diagram
 Image here
