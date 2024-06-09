@@ -49,7 +49,7 @@ The web application is currently in the early stages of development due to our a
 - Add categories and subcategories to the spreadsheet using the '+' buttons located under the tables
 - Add transactions to subcategories by clicking on the corresponding cell for the specific category, which will update the table
 
-A restriction right now is, that it is not possible to delete a transaction or categories/subcategories.
+Currently, the app has a limitation: it does not allow users to delete transactions or categories/subcategories.
 
 ## ER-Diagram
 <img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/6b7fe028-40fd-4e40-ae22-4bb68140cc82" alt="Database ER diagram" width="827" height="682">
