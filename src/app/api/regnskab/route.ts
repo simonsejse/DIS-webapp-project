@@ -49,6 +49,7 @@ export async function GET() {
     select: {
       id: true,
       status: true,
+      description: true,
       name: true,
       created_at: true,
       last_updated_at: true,
