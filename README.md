@@ -52,6 +52,7 @@ The web application is currently in the early stages of development due to our a
 Currently, the app has a limitation: it does not allow users to delete transactions or categories/subcategories. The dashboard also does not show any real values from the database and is also a future feature for the project.
 
 To make it easier for the TA's and lectors to navigate and get an overview of the features, we have created a test-user, which has already been set up with basic data; username: test@gmail.com, password: testing123
+
 This test log-in can be used on the online page, we have set up for the project: http://159.223.237.95/
 
 ### Log-in / sign-up page
