@@ -35,6 +35,14 @@ npx prisma studio
 ```
 
 ## Interact with the app
+
+The web application is currently in the early stages of development due to our ambitious plans for the project. As a result, many functionalities are still marked as work in progress (WIP). At present, users can:
+- Create a new account by signing up
+- Sign in using their created account
+- Create a new 'regnskab' in the 'regnskab' tab
+- Access the spreadsheet for a specific 'regnskab' using the buttons on the right-hand side of the 'regnskab' table
+- Add categories and subcategories to the spreadsheet using the '+' buttons located under the tables
+- Add transactions to subcategories by clicking on the corresponding cell for the specific category, which will update the table
 Text
 
 ## ER-Diagram
