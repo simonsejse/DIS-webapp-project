@@ -61,7 +61,7 @@ Currently, the app has a limitation: it does not allow users to delete transacti
 Image here
 
 ## ER-Diagram
-<img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/6b7fe028-40fd-4e40-ae22-4bb68140cc82" alt="Database ER diagram" style="transform: scale(0.7);">
+<img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/021a000a-44fc-4d87-856a-fa4af9aca596" alt="Database ER diagram" style="transform: scale(0.7);">
 
 ## Use of regular expressions
 We effectively use regular expressions to ensure, that any route other than the sign-in and registration pages will be protected by the authentication middleware, requiring users to be authenticated (i.e., to have a valid token) to access them. This is done in  [middleware.ts](./src/middleware.ts), where the matcher array contains the regular expression, that matches the routes. The method can be seen below:
