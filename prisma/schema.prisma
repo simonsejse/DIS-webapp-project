@@ -44,7 +44,6 @@ model Category {
     spreadsheetId Int
     title         String
     description   String?
-    current_date  DateTime
     created_at    DateTime      @default(now())
     spreadsheet   Spreadsheet   @relation(fields: [spreadsheetId], references: [id])
     subcategories SubCategory[]
@@ -63,7 +62,7 @@ model SubCategory {
 model MonthlyFinance {
     id            Int           @id @default(autoincrement())
     subCategoryId Int
-    month         DateTime
+    month         String
     created_at    DateTime      @default(now())
     subCategory   SubCategory   @relation(fields: [subCategoryId], references: [id])
     transactions  Transaction[]

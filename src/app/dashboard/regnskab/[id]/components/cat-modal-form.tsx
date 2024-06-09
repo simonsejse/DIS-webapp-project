@@ -10,8 +10,6 @@ import { ErrorResponse, SuccessResponseBuilder } from '@/lib/response-builder';
 
 type Props = {
   regnskabId: number;
-  actMonFin: string | undefined;
-  subcat: number | undefined;
   closeModal: () => void;
 };
 
@@ -24,14 +22,11 @@ type FormOption = {
 
 type FormData = {
   name: string;
-  price: number;
-  quantity: number;
+  description: string;
 };
 
 type FormDataExt = FormData & {
   regnskabId: number;
-  actMonFin: string;
-  subcat: number;
 };
 
 type SuccessResponse = {
@@ -40,38 +35,26 @@ type SuccessResponse = {
 
 const FormOptions: FormOption[] = [
   {
-    label: 'Navn',
-    defaultValue: 'Husleje',
+    label: 'Navn på kategori',
+    defaultValue: 'Indtægter',
     id: 'name',
     type: 'text',
   },
   {
-    label: 'Beløb',
-    defaultValue: 500,
-    id: 'price',
-    type: 'number',
-  },
-  {
-    label: 'Antal',
-    defaultValue: 1,
-    id: 'quantity',
-    type: 'number',
+    label: 'Beskrivelse',
+    defaultValue: '',
+    id: 'description',
+    type: 'textarea',
   },
 ];
 
-export default function TransModalForm({
-  regnskabId,
-  actMonFin,
-  subcat,
-  closeModal,
-}: Props) {
+export default function CatModalForm({ regnskabId, closeModal }: Props) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = React.useState<FormData>({
-    name: 'Husleje',
-    price: 500,
-    quantity: 1,
+    name: 'Indtægter',
+    description: '',
   });
 
   const handleChange = (
@@ -92,17 +75,13 @@ export default function TransModalForm({
     FormDataExt
   >(
     async (formData: FormDataExt) => {
-      console.log(subcat);
-      return await axios.post('/api/transactions', {
+      return await axios.post('/api/regnskab/category', {
         ...formData,
         regnskabId,
-        actMonFin,
-        subcat,
       });
     },
     {
       onSuccess: (data) => {
-        console.log(data);
         queryClient.invalidateQueries({
           queryKey: ['spreadsheet', regnskabId],
         });
@@ -125,10 +104,10 @@ export default function TransModalForm({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     closeModal();
-    if (!actMonFin || !subcat) {
+    if (!regnskabId) {
       toast({
         title: 'Error!',
-        description: 'Der skete en uventet fejl. Prøv igen senere.',
+        description: 'Regnskab ikke fundet',
         variant: 'destructive',
       });
       return;
@@ -136,8 +115,6 @@ export default function TransModalForm({
     mutation.mutate({
       ...formData,
       regnskabId,
-      actMonFin,
-      subcat,
     });
   };
 
