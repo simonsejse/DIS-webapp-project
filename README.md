@@ -61,6 +61,12 @@ export const config = {
   matcher: ["/((?!auth/signin|auth/register).*)"],
 };
 ```
+This is also utilized in [utils.ts](./src/lib/utils.ts) to parse numbers. In this regular expression, we sort out any characters other than numbers by replacing them with ''. This can be seen below:
+```typescript
+export function parseNumber(value: string) {
+  return Number(value.replace(/[^0-9.-]+/g, ''));
+}
+```
 
 ## Prerequisites
 
