@@ -54,33 +54,13 @@ Image here
 - Docker
 - Docker-Compose
 
-## Tech Stack for "dis-webapp-project"
-
-### Core Technologies
+## Core Technologies
 - Next.js
 - React
 - Node
 - Tailwind CSS
-
-### Development Tools
-- TypeScript
-- ESLint
-- Prisma
-
-### Dependencies
-- react-hook-form
-- @hookform/resolvers
-- date-fns
-- @radix-ui/react-accordion
-- @radix-ui/react-popover
-- @radix-ui/react-toast
-- @radix-ui/react-label
-- @radix-ui/react-slot
-- lucide-react
-- clsx
-- tailwind-merge
-- tailwindcss-animate
-- zod
+- Mui
+- Shadcn
 
 ## Deploy: Push to Production
 
