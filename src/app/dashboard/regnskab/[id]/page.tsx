@@ -183,6 +183,10 @@ export default function Page({ params }: Props) {
                   />
                 </div>
                 <div className="space-y-2 border-2 p-2 rounded-lg divide-y-2 divide-gray-200">
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    Statistiker{' '}
+                    <span className="text-red-700">(Work In Progress)</span>
+                  </h2>
                   {stats.map((stat, index) => (
                     <div
                       key={index}
