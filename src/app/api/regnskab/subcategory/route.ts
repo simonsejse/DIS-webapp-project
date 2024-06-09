@@ -7,15 +7,17 @@ import {
 export async function POST(req: Request) {
   const { categoryId, name, description } = await req.json();
 
-  if (!categoryId || !name || !description) {
-    return ErrorResponseBuilder.create().message('Invalid request').build();
+  if (!categoryId || !name) {
+    return ErrorResponseBuilder.create()
+      .message('Der skete en fejl, tjek dine inputs')
+      .build();
   }
 
   try {
     const subcategory = await prisma.subCategory.create({
       data: {
         title: name,
-        description,
+        description: description || '',
         category: {
           connect: {
             id: categoryId,
@@ -25,7 +27,7 @@ export async function POST(req: Request) {
     });
 
     return SuccessResponseBuilder.create()
-      .message('Underkategori oprettet')
+      .message(`Du har oprettet underkategorien '${name}'`)
       .build();
   } catch (error) {
     return SuccessResponseBuilder.create().message('Der skete en fejl').build();

@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     const category = await prisma.category.create({
       data: {
         title: name,
-        description,
+        description: description || '',
         spreadsheet: {
           connect: {
             id: regnskabId,
