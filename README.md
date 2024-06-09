@@ -1,6 +1,30 @@
 # FinansFokus
-
-..... 
+## How to run the app
+To run the app, firstly, set up Docker by pulling the PostgreSQL image:
+´´´
+docker pull postgres
+```
+Run the PostgreSQL container on port 5433 (to avoid port conflicts) with the specified user credentials:
+```
+docker run --name db -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -p 5433:5432 -d postgres
+```
+Ensure all necessary dependencies are installed:
+```
+npm install
+```
+Prisma will manage your database. Set it up with the following commands:
+```
+npx prisma install
+npx prisma migrate deploy
+```
+Start the app with:
+```
+npn run dev
+```
+If you need to manually add data or view the database, you can run Prisma Studio:
+```
+npx prisma studio
+```
 
 ## Prerequisites
 
