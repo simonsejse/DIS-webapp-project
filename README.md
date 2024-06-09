@@ -52,8 +52,7 @@ The web application is currently in the early stages of development due to our a
 A restriction right now is, that it is not possible to delete a transaction or categories/subcategories.
 
 ## ER-Diagram
-<img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/68817393-68b1-4f01-b8b3-792c2c6a8758" alt="Database ER diagram" width="827" height="682">
-
+<img src="https://github.com/simonsejse/dis-webapp-project/assets/40537287/6b7fe028-40fd-4e40-ae22-4bb68140cc82" alt="Database ER diagram" width="827" height="682">
 
 ## Use of regular expressions
 We effectively use regular expressions to ensure, that any route other than the sign-in and registration pages will be protected by the authentication middleware, requiring users to be authenticated (i.e., to have a valid token) to access them. This is done in  [middleware.ts](./src/middleware.ts), where the matcher array contains the regular expression, that matches the routes. The method can be seen below:
