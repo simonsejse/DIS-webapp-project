@@ -1,5 +1,10 @@
 # FinansFokus
-## How to run the app
+## The web application
+The project focuses on simplifying financial management. The app enables users to effortlessly create accounting spreadsheets tailored to specific purposes. Each user can create categories and subcategories within these spreadsheets. Users can add transactions to specific subcategories, making it easy to see which categories incur the most and least expenses. This feature significantly simplifies personal financial management. Additionally, the app includes a comprehensive dashboard that summarizes analytics of the imported data.
+
+In the future, the app aims to support custom budget creation, set specific financial goals, generate various reports, and adjust a range of settings to further enhance ease of financial management.
+
+## Run the application
 To run the app, firstly, set up Docker by pulling the PostgreSQL image:
 ```bash
 docker pull postgres
@@ -43,7 +48,8 @@ The web application is currently in the early stages of development due to our a
 - Access the spreadsheet for a specific 'regnskab' using the buttons on the right-hand side of the 'regnskab' table
 - Add categories and subcategories to the spreadsheet using the '+' buttons located under the tables
 - Add transactions to subcategories by clicking on the corresponding cell for the specific category, which will update the table
-Text
+
+It is not possible to delete a transaction or categories/subcategories.
 
 ## ER-Diagram
 Image here
