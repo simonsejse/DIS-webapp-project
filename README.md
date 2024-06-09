@@ -49,7 +49,7 @@ The web application is currently in the early stages of development due to our a
 - Add categories and subcategories to the spreadsheet using the '+' buttons located under the tables
 - Add transactions to subcategories by clicking on the corresponding cell for the specific category, which will update the table
 
-Currently, the app has a limitation: it does not allow users to delete transactions or categories/subcategories. The dashboard also does not show any real values from the database and is also a future feature for the project.
+Currently, the app has a limitation: it does not allow users to delete transactions or categories/subcategories. The dashboard also does not show any real values from the database and is also a future feature for the project. To log out of user, delete cookies or open in incognito mode, as sign-out has not been implemented yet.
 
 To make it easier for the TA's and lectors to navigate and get an overview of the features, we have created a test-user, which has already been set up with basic data; username: test@gmail.com, password: testing123
 
